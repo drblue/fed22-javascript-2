@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 
 type Post = {
-	id: number
 	title: string
 	likes: number
 }
@@ -11,9 +10,9 @@ const App = () => {
 	const [msg, setMsg] = useState("Hi mom, I'm stateful")
 	const [clicks, setClicks] = useState(0)
 	const [posts, setPosts] = useState<Post[]>([
-		{ id: 1, title: "React Rocks 🤘🏻!", likes: 1337 },
-		{ id: 2, title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },
-		{ id: 3, title: "Got state?", likes: 3 },
+		{ title: "React Rocks 🤘🏻!", likes: 1337 },
+		{ title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },
+		{ title: "Got state?", likes: 3 },
 	])
 
 	const handleButtonClick = () => {
@@ -41,8 +40,8 @@ const App = () => {
 
 			<ul>
 				{
-					posts.map(post => (
-						<li key={post.id}>
+					posts.map( (post, index) => (
+						<li key={index}>
 							{post.title} ({post.likes} likes)
 						</li>
 					))
