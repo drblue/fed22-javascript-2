@@ -21,6 +21,8 @@ const App = () => {
 			<p>You have clicked the button {clicks} times.</p>
 
 			<button onClick={handleButtonClick} className="btn btn-success btn-lg">👆🏻 me!</button>
+
+			<button onClick={ () => { setMsg('Hi dad!') } } className="btn btn-warning btn-lg">Hi dad!</button>
 		</div>
 	)
 }
