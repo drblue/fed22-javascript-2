@@ -14,10 +14,15 @@ const App = () => {
 		{ title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },
 		{ title: "Got state?", likes: 3 },
 	])
+	const [salary, setSalary] = useState(10)
 
 	const handleButtonClick = () => {
 		setClicks(clicks + 1)
 		// console.log("Clicks:", clicks)
+	}
+
+	const handleChangeSalary = (amount: number) => {
+		setSalary(salary + amount)
 	}
 
 	console.log("Rendering...")
@@ -36,24 +41,28 @@ const App = () => {
 
 			<hr />
 
-			<p>Salary per hour: SALARY &euro;</p>
+			<p>Salary per hour: {salary} &euro;</p>
 
 			<div className="buttons">
 				<div className="mb-1">
 					<button
 						className="btn btn-primary btn-lg"
+						onClick={() => { handleChangeSalary(1) }}
 					>Raise 1 &euro; 🤑</button>
 					<button
 						className="btn btn-warning btn-lg"
+						onClick={() => { handleChangeSalary(-1) }}
 					>Decrease 1 &euro; 😢</button>
 				</div>
 
 				<div className="mb-1">
 					<button
 						className="btn btn-success btn-lg"
+						onClick={() => { handleChangeSalary(5) }}
 					>Raise 5 &euro; 🤑🤑🤑</button>
 					<button
 						className="btn btn-danger btn-lg"
+						onClick={() => { handleChangeSalary(-5) }}
 					>Decrease 5 &euro; 😢😢😢</button>
 				</div>
 			</div>
