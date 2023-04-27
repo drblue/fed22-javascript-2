@@ -10,12 +10,17 @@ const App = () => {
 	const [msg, setMsg] = useState("Hi mom, I'm stateful")
 	const [clicks, setClicks] = useState(0)
 	const [posts, setPosts] = useState<Post[]>([
-		{ title: "React Rocks 🤘🏻!", likes: 1337 },
-		{ title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },
-		{ title: "Got state?", likes: 3 },
+		{ title: "React Rocks 🤘🏻!", likes: 1337 },  // 0xAF
+		{ title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },  // 0x1336
+		{ title: "Got state?", likes: 3 },  // 0x420
 	])
 	const [salary, setSalary] = useState(10)
 	const [showSalary, setShowSalary] = useState(false)
+
+	const handleAddLike = (post: Post) => {
+		post.likes++
+		setPosts([...posts])
+	}
 
 	const handleButtonClick = () => {
 		console.log("Clicks before first state change:", clicks)
@@ -103,6 +108,10 @@ const App = () => {
 					posts.map( (post, index) => (
 						<li key={index}>
 							{post.title} ({post.likes} likes)
+							<button
+								className="btn btn-success btn-sm ms-1"
+								onClick={() => handleAddLike(post)}
+							>❤️</button>
 						</li>
 					))
 				}
