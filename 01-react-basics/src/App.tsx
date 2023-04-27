@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ClickCounter from './components/ClickCounter'
 import './App.css'
 
 type Post = {
@@ -8,7 +9,6 @@ type Post = {
 
 const App = () => {
 	const [msg, setMsg] = useState("Hi mom, I'm stateful")
-	const [clicks, setClicks] = useState(0)
 	const [posts, setPosts] = useState<Post[]>([
 		{ title: "React Rocks 🤘🏻!", likes: 1337 },  // 0xAF
 		{ title: "JSX Rocks Even Moar 🤘🏻!", likes: 42 },  // 0x1336
@@ -28,15 +28,6 @@ const App = () => {
 		// setPosts(posts.filter(post => post !== postToDelete))
 	}
 
-	const handleButtonClick = () => {
-		console.log("Clicks before first state change:", clicks)
-		setClicks( (prevClicks) => { return prevClicks + 1 } )   // prevClicks = 0, return 1
-		console.log("Clicks after first state change:", clicks)
-
-		setClicks( prevClicks => prevClicks + 1 )   // prevClicks = 1, return 2
-		console.log("Clicks after second state change:", clicks)
-	}
-
 	const handleChangeSalary = (amount: number) => {
 		if (salary + amount < 5) {
 			return setSalary(5)
@@ -50,14 +41,13 @@ const App = () => {
 	return (
 		<div className="App">
 			<h1>React Basics</h1>
-
 			<h2>{msg}</h2>
 
-			<p>You have clicked the button {clicks} times.</p>
-
-			<button onClick={handleButtonClick} className="btn btn-success btn-lg">👆🏻 me!</button>
-
 			<button onClick={ () => { setMsg('Hi dad!') } } className="btn btn-warning btn-lg">Hi dad!</button>
+
+			<hr />
+
+			<ClickCounter />
 
 			<hr />
 
