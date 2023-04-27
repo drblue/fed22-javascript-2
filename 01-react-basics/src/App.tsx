@@ -17,8 +17,12 @@ const App = () => {
 	const [salary, setSalary] = useState(10)
 
 	const handleButtonClick = () => {
-		setClicks(clicks + 1)
-		// console.log("Clicks:", clicks)
+		console.log("Clicks before first state change:", clicks)
+		setClicks( (prevClicks) => { return prevClicks + 1 } )   // prevClicks = 0, return 1
+		console.log("Clicks after first state change:", clicks)
+
+		setClicks( prevClicks => prevClicks + 1 )   // prevClicks = 1, return 2
+		console.log("Clicks after second state change:", clicks)
 	}
 
 	const handleChangeSalary = (amount: number) => {
