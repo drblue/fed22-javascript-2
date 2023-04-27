@@ -109,23 +109,27 @@ const App = () => {
 
 			<h2>Posts</h2>
 
-			<ul>
-				{
-					posts.map( (post, index) => (
-						<li key={index}>
-							{post.title} ({post.likes} likes)
-							<button
-								className="btn btn-success btn-sm ms-1"
-								onClick={() => handleAddLike(post)}
-							>❤️</button>
-							<button
-								className="btn btn-danger btn-sm ms-1"
-								onClick={() => handleDeletePost(post)}
-							>🗑️</button>
-						</li>
-					))
-				}
-			</ul>
+			{posts.length > 0 && (
+				<ul>
+					{
+						posts.map( (post, index) => (
+							<li key={index}>
+								{post.title} ({post.likes} likes)
+								<button
+									className="btn btn-success btn-sm ms-1"
+									onClick={() => handleAddLike(post)}
+								>❤️</button>
+								<button
+									className="btn btn-danger btn-sm ms-1"
+									onClick={() => handleDeletePost(post)}
+								>🗑️</button>
+							</li>
+						))
+					}
+				</ul>
+			)}
+
+			{posts.length === 0 && (<p>These are not the posts you're looking for</p>)}
 		</div>
 	)
 }
