@@ -22,6 +22,12 @@ const App = () => {
 		setPosts([...posts])
 	}
 
+	const handleDeletePost = (postToDelete: Post) => {
+		setPosts(posts.filter(post => post !== postToDelete))
+		// setPosts([...posts, { title: "I am new post", likes: 0 }])
+		// setPosts(posts.filter(post => post !== postToDelete))
+	}
+
 	const handleButtonClick = () => {
 		console.log("Clicks before first state change:", clicks)
 		setClicks( (prevClicks) => { return prevClicks + 1 } )   // prevClicks = 0, return 1
@@ -112,6 +118,10 @@ const App = () => {
 								className="btn btn-success btn-sm ms-1"
 								onClick={() => handleAddLike(post)}
 							>❤️</button>
+							<button
+								className="btn btn-danger btn-sm ms-1"
+								onClick={() => handleDeletePost(post)}
+							>🗑️</button>
 						</li>
 					))
 				}
