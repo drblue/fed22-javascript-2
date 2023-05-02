@@ -36,6 +36,9 @@ function App() {
 		setTodos([...todos])
 	}
 
+	const unfinishedTodos = todos.filter(todo => !todo.completed)
+	const finishedTodos = todos.filter(todo => todo.completed)
+
 	return (
 		<div className="container">
 			<h1 className="mb-3">React Simple Todos</h1>
@@ -60,7 +63,7 @@ function App() {
 			{todos.length > 0 && (
 				<>
 					<ul className="todolist">
-						{todos.map((todo, index) => (
+						{unfinishedTodos.map((todo, index) => (
 							<li className={todo.completed ? 'done' : ''} key={index}>
 								<span className="todo-title">
 									{todo.title}
@@ -77,8 +80,28 @@ function App() {
 							</li>
 						) )}
 					</ul>
+
+					<ul className="todolist">
+						{finishedTodos.map((todo, index) => (
+							<li className={todo.completed ? 'done' : ''} key={index}>
+								<span className="todo-title">
+									{todo.title}
+								</span>
+
+								<span className="ms-1">
+									<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
+										{todo.completed ? '☑️' : '✅'}
+									</span>
+									<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
+										🗑️
+									</span>
+								</span>
+							</li>
+						) )}
+					</ul>
+
 					<p className="status">
-						{todos.filter(todo => todo.completed).length} of {todos.length} todos completed
+						{finishedTodos.length} of {todos.length} todos completed
 					</p>
 				</>
 			)}
