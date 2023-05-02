@@ -70,6 +70,10 @@ function App() {
 					</li>
 				) )}
 			</ul>
+
+			<p className="status">
+				{todos.filter(todo => todo.completed).length} of {todos.length} todos completed
+			</p>
 		</div>
 	)
 }
