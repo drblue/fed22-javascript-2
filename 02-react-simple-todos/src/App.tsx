@@ -57,28 +57,36 @@ function App() {
 				</div>
 			</form>
 
-			<ul className="todolist">
-				{todos.map((todo, index) => (
-					<li className={todo.completed ? 'done' : ''} key={index}>
-						<span className="todo-title">
-							{todo.title}
-						</span>
+			{todos.length > 0 && (
+				<>
+					<ul className="todolist">
+						{todos.map((todo, index) => (
+							<li className={todo.completed ? 'done' : ''} key={index}>
+								<span className="todo-title">
+									{todo.title}
+								</span>
 
-						<span className="ms-1">
-							<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
-								{todo.completed ? '☑️' : '✅'}
-							</span>
-							<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
-								🗑️
-							</span>
-						</span>
-					</li>
-				) )}
-			</ul>
+								<span className="ms-1">
+									<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
+										{todo.completed ? '☑️' : '✅'}
+									</span>
+									<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
+										🗑️
+									</span>
+								</span>
+							</li>
+						) )}
+					</ul>
+					<p className="status">
+						{todos.filter(todo => todo.completed).length} of {todos.length} todos completed
+					</p>
+				</>
+			)}
 
-			<p className="status">
-				{todos.filter(todo => todo.completed).length} of {todos.length} todos completed
-			</p>
+			{todos.length === 0 && (
+				<p>Yayyy, you have 0 todos to do</p>
+			)}
+
 		</div>
 	)
 }
