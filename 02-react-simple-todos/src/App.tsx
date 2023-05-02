@@ -9,6 +9,22 @@ function App() {
 		{ title: "Drink MOAR coffee", completed: false },
 		{ title: "Drink ALL THE coffee", completed: false },
 	])
+	const [newTodoTitle, setNewTodoTitle] = useState("")
+
+	const handleSubmit = (e: React.FormEvent) => {
+		// stop form from submitting
+		e.preventDefault()
+
+		// create a new todo and set a new todos state
+		const newTodo: Todo = {
+			title: newTodoTitle,
+			completed: false,
+		}
+		setTodos([...todos, newTodo])
+
+		// clear newTodoTitle state
+		setNewTodoTitle("")
+	}
 
 	const toggleTodo = (todo: Todo) => {
 		todo.completed = !todo.completed
@@ -17,7 +33,24 @@ function App() {
 
 	return (
 		<div className="container">
-			<h1>React Simple Todos</h1>
+			<h1 className="mb-3">React Simple Todos</h1>
+
+			<form onSubmit={handleSubmit} className="mb-3">
+				<div className="input-group">
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Todo title"
+						onChange={e => setNewTodoTitle(e.target.value)}
+						value={newTodoTitle}
+					/>
+
+					<button
+						type="submit"
+						className="btn btn-success"
+					>Create</button>
+				</div>
+			</form>
 
 			<ul className="todolist">
 				{todos.map((todo, index) => (
