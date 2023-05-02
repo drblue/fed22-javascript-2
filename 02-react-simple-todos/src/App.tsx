@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Todo, TodoList } from './types'
 import './assets/scss/App.scss'
 
@@ -38,6 +38,14 @@ function App() {
 
 	const unfinishedTodos = todos.filter(todo => !todo.completed)
 	const finishedTodos = todos.filter(todo => todo.completed)
+
+	// Our first side-effect
+	useEffect( () => {
+		console.log("Updating page title using an effect")
+		document.title = `${finishedTodos.length} of ${todos.length} completed`
+	}, [finishedTodos.length, todos.length] )
+
+	console.log("Rendering...")
 
 	return (
 		<div className="container">
