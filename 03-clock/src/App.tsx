@@ -16,6 +16,10 @@ function App() {
 		}, 1000)
 	}, [])
 
+	useEffect(() => {
+		document.title = time
+	}, [time])
+
 	return (
 		<div className="container">
 			<div className="display-1 text-center">
