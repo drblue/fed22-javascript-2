@@ -26,6 +26,11 @@ function App() {
 		setNewTodoTitle("")
 	}
 
+	const deleteTodo = (todoToDelete: Todo) => {
+		// set a new list of todos where the clicked todo is excluded
+		setTodos(todos.filter(todo => todo !== todoToDelete))
+	}
+
 	const toggleTodo = (todo: Todo) => {
 		todo.completed = !todo.completed
 		setTodos([...todos])
@@ -63,7 +68,7 @@ function App() {
 							<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
 								{todo.completed ? '☑️' : '✅'}
 							</span>
-							<span className="todo-delete" role="button">
+							<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
 								🗑️
 							</span>
 						</span>
