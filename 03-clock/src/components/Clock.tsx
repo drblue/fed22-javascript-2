@@ -7,12 +7,21 @@ const Clock = () => {
 	})
 
 	useEffect(() => {
-		console.log("Starting clock...")
+		// This will only be executed when the component is mounted,
+		// and only AFTER the component has been rendered
+		console.log("🕰🔨 Clock is mounted 😊 Timer started ⏱️")
 
-		setInterval(() => {
+		const intervalId = setInterval(() => {
 			setTime(new Date().toLocaleTimeString())
 			console.log("tick")
 		}, 1000)
+
+		return () => {
+			// This clean-up function will be executed when
+			// the component is about to be unmounted
+			console.log("🕰💥 Clock is being unmounted 😨 Stopping timer 😅")
+			clearInterval(intervalId)
+		}
 	}, [])
 
 	useEffect(() => {
