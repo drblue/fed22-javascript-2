@@ -38,6 +38,7 @@ const AddNewTodoForm: React.FC<IProps> = ({ onAddTodo }) => {
 				/>
 
 				<button
+					disabled={!newTodoTitle.trim()}
 					type="submit"
 					className="btn btn-success"
 				>Create</button>
