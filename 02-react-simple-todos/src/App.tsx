@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import TodoListItem from './components/TodoListItem'
 import { Todo, TodoList } from './types'
 import './assets/scss/App.scss'
 
@@ -39,21 +40,6 @@ function App() {
 	const unfinishedTodos = todos.filter(todo => !todo.completed)
 	const finishedTodos = todos.filter(todo => todo.completed)
 
-	// This will only be executed when the component is mounted,
-	// and only AFTER the component has been rendered
-	useEffect(() => {
-		console.log("Look mom, I'm a newly mounted component 👶🏻")
-	}, [])
-
-	// This will only be executed if `finishedTodos.length` or `todos.length`
-	// have changed since last render, and only AFTER the component has been rendered
-	useEffect( () => {
-		console.log("Updating page title using an effect")
-		document.title = `${finishedTodos.length} of ${todos.length} completed`
-	}, [finishedTodos.length, todos.length] )
-
-	console.log("Rendering...")
-
 	return (
 		<div className="container">
 			<h1 className="mb-3">React Simple Todos</h1>
@@ -79,39 +65,13 @@ function App() {
 				<>
 					<ul className="todolist">
 						{unfinishedTodos.map((todo, index) => (
-							<li className={todo.completed ? 'done' : ''} key={index}>
-								<span className="todo-title">
-									{todo.title}
-								</span>
-
-								<span className="ms-1">
-									<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
-										{todo.completed ? '☑️' : '✅'}
-									</span>
-									<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
-										🗑️
-									</span>
-								</span>
-							</li>
+							<TodoListItem todo={todo} key={index} />
 						) )}
 					</ul>
 
 					<ul className="todolist">
 						{finishedTodos.map((todo, index) => (
-							<li className={todo.completed ? 'done' : ''} key={index}>
-								<span className="todo-title">
-									{todo.title}
-								</span>
-
-								<span className="ms-1">
-									<span className="todo-toggle" onClick={() => toggleTodo(todo)} role="button">
-										{todo.completed ? '☑️' : '✅'}
-									</span>
-									<span className="todo-delete" onClick={() => deleteTodo(todo)} role="button">
-										🗑️
-									</span>
-								</span>
-							</li>
+							<TodoListItem todo={todo} key={index} />
 						) )}
 					</ul>
 
