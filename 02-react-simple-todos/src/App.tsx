@@ -65,13 +65,23 @@ function App() {
 				<>
 					<ul className="todolist">
 						{unfinishedTodos.map((todo, index) => (
-							<TodoListItem todo={todo} key={index} />
+							<TodoListItem
+								onToggle={toggleTodo}
+								onDelete={deleteTodo}
+								todo={todo}
+								key={index}
+							/>
 						) )}
 					</ul>
 
 					<ul className="todolist">
 						{finishedTodos.map((todo, index) => (
-							<TodoListItem todo={todo} key={index} />
+							<TodoListItem
+								onToggle={toggleTodo}
+								onDelete={deleteTodo}
+								todo={todo}
+								key={index}
+							/>
 						) )}
 					</ul>
 
