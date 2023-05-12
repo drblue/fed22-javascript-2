@@ -39,6 +39,7 @@ function App() {
 				<button onClick={() => setResource('photos')} className="btn btn-success">Photos</button>
 				<button onClick={() => setResource('posts')} className="btn btn-warning">Posts</button>
 				<button onClick={() => setResource('todos')} className="btn btn-danger">Todos</button>
+				<button onClick={() => setResource('memes')} className="btn btn-info">Memes 😂</button>
 			</div>
 
 			{resource && (
