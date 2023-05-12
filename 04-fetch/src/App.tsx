@@ -1,29 +1,39 @@
 import { useEffect, useState } from 'react'
+import { getResource } from './services/API'
+import { IResource } from './types'
 import './assets/scss/App.scss'
-
-interface IResource {
-	id: number
-	title: string
-}
 
 function App() {
 	const [resource, setResource] = useState('')
 	const [data, setData] = useState<IResource[]>([])
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState('')
 
 	useEffect(() => {
-		if (!resource) {
-			return
-		}
-
 		const fetchData = async () => {
-			// fetch resource
-			const res = await fetch(`https://jsonplaceholder.typicode.com/${resource}`)
+			if (!resource) {
+				return
+			}
 
-			// parse response as json
-			const payload = await res.json() as IResource[]
+			// empty data & error before fetching new
+			// and set loading
+			setError('')
+			setData([])
+			setLoading(true)
 
-			// update data state with resource payload
-			setData(payload)
+			try {
+				const payload = await getResource(resource)
+
+				// update data state with resource payload
+				setData(payload)
+				setLoading(false)
+
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			} catch (e: any) {
+				setError(e.toString())
+				setLoading(false)
+
+			}
 		}
 
 		// call function
@@ -34,7 +44,7 @@ function App() {
 		<div className="container">
 			<h1 className="mb-3">Fetch</h1>
 
-			<div className="d-flex justify-content-between">
+			<div className="d-flex justify-content-between mb-3">
 				<button onClick={() => setResource('albums')} className="btn btn-primary">Albums</button>
 				<button onClick={() => setResource('photos')} className="btn btn-success">Photos</button>
 				<button onClick={() => setResource('posts')} className="btn btn-warning">Posts</button>
@@ -42,7 +52,11 @@ function App() {
 				<button onClick={() => setResource('memes')} className="btn btn-info">Memes 😂</button>
 			</div>
 
-			{resource && (
+			{error && <p>{error}</p>}
+
+			{loading && <p>Loading...</p>}
+
+			{!loading && !error && resource && data.length > 0 && (
 				<>
 					<h2>{resource}</h2>
 					<p>There are {data.length} {resource}.</p>
