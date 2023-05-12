@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getResource } from './services/API'
 import { IResource } from './types'
 import './assets/scss/App.scss'
+import ResourceList from './components/ResourceList'
 
 function App() {
 	const [resource, setResource] = useState('')
@@ -52,21 +53,12 @@ function App() {
 				<button onClick={() => setResource('memes')} className="btn btn-info">Memes 😂</button>
 			</div>
 
-			{error && <p>{error}</p>}
-
-			{loading && <p>Loading...</p>}
-
-			{!loading && !error && resource && data.length > 0 && (
-				<>
-					<h2>{resource}</h2>
-					<p>There are {data.length} {resource}.</p>
-					<ol>
-						{data.map(item => (
-							<li key={item.id}>{item.title}</li>
-						))}
-					</ol>
-				</>
-			)}
+			<ResourceList
+				error={error}
+				loading={loading}
+				resource={resource}
+				data={data}
+			/>
 		</div>
 	)
 }
