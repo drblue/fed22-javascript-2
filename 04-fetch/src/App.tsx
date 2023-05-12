@@ -1,9 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './assets/scss/App.scss'
 
+interface IResource {
+	id: number
+	title: string
+}
+
 function App() {
-	const [resource, setResource] = useState('posts')
-	const [data, setData] = useState([])
+	const [resource, setResource] = useState('')
+	const [data, setData] = useState<IResource[]>([])
+
+	useEffect(() => {
+		if (!resource) {
+			return
+		}
+
+		const fetchData = async () => {
+			// fetch resource
+			const res = await fetch(`https://jsonplaceholder.typicode.com/${resource}`)
+
+			// parse response as json
+			const payload = await res.json() as IResource[]
+
+			// update data state with resource payload
+			setData(payload)
+		}
+
+		// call function
+		fetchData()
+	}, [resource])
 
 	return (
 		<div className="container">
@@ -16,13 +41,13 @@ function App() {
 				<button onClick={() => setResource('todos')} className="btn btn-danger">Todos</button>
 			</div>
 
-			{data && (
+			{resource && (
 				<>
 					<h2>{resource}</h2>
 					<p>There are {data.length} {resource}.</p>
 					<ol>
 						{data.map(item => (
-							<li>{item.title}</li>
+							<li key={item.id}>{item.title}</li>
 						))}
 					</ol>
 				</>
