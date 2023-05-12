@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import TodoListItem from './components/TodoListItem'
-import { Todo, TodoList } from './types'
+import { Todo, Todos } from './types'
 import './assets/scss/App.scss'
 import TodoCounter from './components/TodoCounter'
+import TodoList from './components/TodoList'
 import AddNewTodoForm from './components/AddNewTodoForm'
 
 function App() {
-	const [todos, setTodos] = useState<TodoList>([
+	const [todos, setTodos] = useState<Todos>([
 		{ title: "Make coffee", completed: true },
 		{ title: "Drink coffee", completed: false },
 		{ title: "Drink MOAR coffee", completed: false },
@@ -40,27 +40,17 @@ function App() {
 
 			{todos.length > 0 && (
 				<>
-					<ul className="todolist">
-						{unfinishedTodos.map((todo, index) => (
-							<TodoListItem
-								onToggle={toggleTodo}
-								onDelete={deleteTodo}
-								todo={todo}
-								key={index}
-							/>
-						) )}
-					</ul>
+					<TodoList
+						onToggle={toggleTodo}
+						onDelete={deleteTodo}
+						todos={unfinishedTodos}
+					/>
 
-					<ul className="todolist">
-						{finishedTodos.map((todo, index) => (
-							<TodoListItem
-								onToggle={toggleTodo}
-								onDelete={deleteTodo}
-								todo={todo}
-								key={index}
-							/>
-						) )}
-					</ul>
+					<TodoList
+						onToggle={toggleTodo}
+						onDelete={deleteTodo}
+						todos={finishedTodos}
+					/>
 
 					<TodoCounter finished={finishedTodos.length} total={todos.length} />
 				</>

@@ -3,4 +3,4 @@ export type Todo = {
 	completed: boolean
 }
 
-export type TodoList = Todo[]
+export type Todos = Todo[]
