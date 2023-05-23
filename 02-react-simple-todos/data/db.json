@@ -18,7 +18,17 @@
     {
       "id": 4,
       "title": "Drink ALL THE coffee",
-      "completed": true
+      "completed": false
+    },
+    {
+      "title": "PRETTY FLY",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "title": "FOR A WHITE GUY",
+      "completed": true,
+      "id": 6
     }
   ]
 }

@@ -36,10 +36,14 @@ function App() {
 
 	// Toggle the completed status of a todo in the api
 	const toggleTodo = async (todo: Todo) => {
-		todo.completed = !todo.completed
+		if (!todo.id) {
+			return
+		}
 
-		// Toggle todo in the api
-		await TodosAPI.toggleTodo(todo)
+		// Update a todo in the api
+		await TodosAPI.updateTodo(todo.id, {
+			completed: !todo.completed
+		})
 
 		// Get all the todos from the api
 		getTodos()
