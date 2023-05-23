@@ -36,3 +36,7 @@ export const createTodo = async (todo: Todo) => {
  *
  * @param todo_id Todo to delete
  */
+export const deleteTodo = async (todo_id: number) => {
+	const res = await axios.delete(`${BASE_URL}/todos/${todo_id}`)
+	return res.data
+}
