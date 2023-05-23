@@ -14,8 +14,9 @@ function App() {
 		setTodos(data)
 	}
 
-	const addTodo = (todo: Todo) => {
-		setTodos([...todos, todo])
+	const addTodo = async (todo: Todo) => {
+		await TodosAPI.createTodo(todo)
+		getTodos()
 	}
 
 	const deleteTodo = (todoToDelete: Todo) => {
