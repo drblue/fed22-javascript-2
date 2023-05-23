@@ -30,6 +30,10 @@ export const createTodo = async (todo: Todo) => {
  * @param todo_id Todo to update
  * @param data Data to update todo with
  */
+export const toggleTodo = async (todo: Todo) => {
+	const res = await axios.patch(`${BASE_URL}/todos/${todo.id}`, todo)
+	return res.data as Todo
+}
 
 /**
  * Delete a todo
