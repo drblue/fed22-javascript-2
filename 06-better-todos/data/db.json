@@ -1,0 +1,19 @@
+{
+  "todos": [
+  {
+      "title": "Learn React Bootstrap",
+      "completed": false,
+      "id": 1
+    },
+    {
+      "title": "Learn React Router",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "title": "Learn stuff",
+      "completed": false,
+      "id": 3
+    }
+  ]
+}
