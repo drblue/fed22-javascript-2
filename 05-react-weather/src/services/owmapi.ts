@@ -26,12 +26,12 @@ export const getCurrentWeather = async (query: string) => {
  *
  * @param {string} query City to get current weather for
  */
-const getCurrentWeatherFetch = async (query: string) => {
+export const getCurrentWeatherFetch = async (query: string) => {
 	// get weather for query from OpenWeatherMap API
 	const response = await fetch(`${BASE_URL}/weather?q=${query}&units=metric&appid=${API_KEY}`)
 
 	// convert response from JSON
-	const data = await response.json()
+	const data = await response.json() as ICurrentWeather
 
 	// fake slow api
 	// await new Promise(r => setTimeout(r, 1500))
