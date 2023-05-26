@@ -9,16 +9,25 @@ import './assets/scss/App.scss'
 function App() {
 	const [currentWeather, setCurrentWeather] = useState<ICurrentWeather|null>(null)
 	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState<string|false>(false)
 
 	const handleSearch = async (location: string) => {
 		setCurrentWeather(null)
+		setError(false)
 		setLoading(true)
 
-		// call API and ask for weather in `location`
-		const data = await getCurrentWeather(location)
+		try {
+			// call API and ask for weather in `location`
+			const data = await getCurrentWeather(location)
 
-		// update `currentWeather`-state with the current weather
-		setCurrentWeather(data)
+			// update `currentWeather`-state with the current weather
+			setCurrentWeather(data)
+
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (err: any) {
+			setError(err.message)
+
+		}
 
 		setLoading(false)
 	}
@@ -26,6 +35,12 @@ function App() {
 	return (
 		<div id="app" className="container">
 			<SearchCity onSearch={handleSearch} />
+
+			{error && (
+				<div className="alert alert-warning">
+					{error}
+				</div>
+			)}
 
 			{loading && (
 				<img src={Airplane} className="img-fluid py-5 w-100" />
