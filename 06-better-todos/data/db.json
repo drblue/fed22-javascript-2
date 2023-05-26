@@ -12,7 +12,7 @@
     },
     {
       "title": "Learn stuff",
-      "completed": false,
+      "completed": true,
       "id": 3
     }
   ]
