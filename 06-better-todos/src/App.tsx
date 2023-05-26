@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Todo, Todos } from './types'
+import Container from 'react-bootstrap/Container'
 import './assets/scss/App.scss'
 import TodoCounter from './components/TodoCounter'
 import TodoList from './components/TodoList'
@@ -60,7 +61,7 @@ function App() {
 	// console.log("App rendering...")
 
 	return (
-		<div className="container">
+		<Container>
 			<h1 className="mb-3">React Simple Todos</h1>
 
 			<AddNewTodoForm onAddTodo={addTodo} />
@@ -87,7 +88,7 @@ function App() {
 				<p>Yayyy, you have 0 todos to do</p>
 			)}
 
-		</div>
+		</Container>
 	)
 }
 
