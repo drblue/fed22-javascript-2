@@ -15,6 +15,16 @@ export const getTodos = async () => {
 }
 
 /**
+ * Get a single todo
+ *
+ * @param todo_id Todo ID to get
+ */
+export const getTodo = async (todo_id: number) => {
+	const res = await axios.get(`${BASE_URL}/todos/${todo_id}`)
+	return res.data as Todo
+}
+
+/**
  * Create a new todo
  *
  * @param data Object with properties and values for the new todo
