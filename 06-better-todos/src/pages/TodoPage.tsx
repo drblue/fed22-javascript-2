@@ -43,12 +43,17 @@ const TodoPage = () => {
 		// Delete todo from the api
 		await TodosAPI.deleteTodo(todo.id)
 
-		// Navigate user to `/todos`
-		navigate('/todos', {
+		// Navigate user to `/todos` (using state)
+		// navigate('/todos', {
+		// 	replace: true,
+		// 	state: {
+		// 		message: `Todo "${todo.title}" was successfully deleted`,
+		// 	},
+		// })
+
+		// Navigate user to `/todos` (using search params/query params)
+		navigate('/todos?deleted=true', {
 			replace: true,
-			state: {
-				message: `Todo "${todo.title}" was successfully deleted`,
-			},
 		})
 	}
 

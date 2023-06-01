@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react'
 import { Todo, Todos } from '../types'
 import Alert from 'react-bootstrap/Alert'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import AddNewTodoForm from '../components/AddNewTodoForm'
 import * as TodosAPI from '../services/TodosAPI'
 
 const TodosPage = () => {
 	const [todos, setTodos] = useState<Todos|null>(null)
 	const location = useLocation()
+	const [searchParams, setSearchParams] = useSearchParams()
+	const searchParams_deletedTodo = searchParams.get("deleted")
+	const deletedTodo = Boolean(searchParams_deletedTodo)
 
 	// Get todos from api
 	const getTodos = async () => {
@@ -36,6 +39,12 @@ const TodosPage = () => {
 			{location.state?.message && (
 				<Alert variant="success">
 					{location.state.message}
+				</Alert>
+			)}
+
+			{deletedTodo && (
+				<Alert variant="success">
+					Todo was successfully deleted
 				</Alert>
 			)}
 
