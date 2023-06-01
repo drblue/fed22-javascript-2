@@ -25,12 +25,12 @@ const TodoPage = () => {
 		}
 
 		// Update a todo in the api
-		await TodosAPI.updateTodo(todo.id, {
+		const updatedTodo = await TodosAPI.updateTodo(todo.id, {
 			completed: !todo.completed
 		})
 
-		// Get all the todos from the api
-		getTodo(todo.id)
+		// update todo state with the updated todo
+		setTodo(updatedTodo)
 	}
 
 	useEffect(() => {
