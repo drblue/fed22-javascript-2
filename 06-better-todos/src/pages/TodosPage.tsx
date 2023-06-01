@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import AddNewTodoForm from '../components/AddNewTodoForm'
+import AutoDismissingAlert from '../components/AutoDismissingAlert'
 import * as TodosAPI from '../services/TodosAPI'
 
 const TodosPage = () => {
@@ -43,9 +44,9 @@ const TodosPage = () => {
 			)}
 
 			{deletedTodo && (
-				<Alert variant="success">
+				<AutoDismissingAlert variant="success" hideAfter={3}>
 					Todo was successfully deleted
-				</Alert>
+				</AutoDismissingAlert>
 			)}
 
 			{todos && todos.length > 0 && (
