@@ -46,6 +46,9 @@ const TodoPage = () => {
 		// Navigate user to `/todos`
 		navigate('/todos', {
 			replace: true,
+			state: {
+				message: `Todo "${todo.title}" was successfully deleted`,
+			},
 		})
 	}
 
