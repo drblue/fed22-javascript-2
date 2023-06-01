@@ -1,7 +1,8 @@
 import Container from 'react-bootstrap/Container'
 import { Routes, Route } from 'react-router-dom'
-import HomePage from './pages/HomePage'
 import Navigation from './components/Navigation'
+import CreateTodoPage from './pages/CreateTodoPage'
+import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import TodoPage from './pages/TodoPage'
 import TodosPage from './pages/TodosPage'
@@ -17,6 +18,7 @@ const App = () => {
 					<Route path="/" element={<HomePage />} />
 					<Route path="/todos" element={<TodosPage />} />
 					<Route path="/todos/:id" element={<TodoPage />} />
+					<Route path="/todos/create" element={<CreateTodoPage />} />
 
 					<Route path="*" element={<NotFound />} />
 				</Routes>

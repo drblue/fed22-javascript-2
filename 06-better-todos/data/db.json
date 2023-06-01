@@ -1,6 +1,6 @@
 {
   "todos": [
-  {
+    {
       "title": "Learn React Bootstrap",
       "completed": false,
       "id": 1
@@ -14,6 +14,21 @@
       "title": "Learn stuff",
       "completed": true,
       "id": 3
+    },
+    {
+      "title": "Look mommy, a todo 🤩!",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "title": "Lalalala",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "I <3 TypeScript",
+      "completed": false,
+      "id": 6
     }
   ]
 }
