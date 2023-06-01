@@ -44,7 +44,9 @@ const TodoPage = () => {
 		await TodosAPI.deleteTodo(todo.id)
 
 		// Navigate user to `/todos`
-		navigate('/todos')
+		navigate('/todos', {
+			replace: true,
+		})
 	}
 
 	// Toggle the completed status of a todo in the api
