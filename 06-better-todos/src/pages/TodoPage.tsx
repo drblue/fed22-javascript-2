@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Todo } from '../types'
 import * as TodosAPI from '../services/TodosAPI'
@@ -110,7 +109,11 @@ const TodoPage = () => {
 
 			<div className="buttons mb-3">
 				<Button variant='success' onClick={() => toggleTodo(todo)}>Toggle</Button>
-				<Button variant='warning'>Edit</Button>
+
+				<Link to={`/todos/${todoId}/edit`}>
+					<Button variant='warning'>Edit</Button>
+				</Link>
+
 				<Button variant='danger' onClick={() => setShowConfirmDelete(true)}>Delete</Button>
 			</div>
 
