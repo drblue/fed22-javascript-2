@@ -40,6 +40,10 @@ const TodoPage = () => {
 			return
 		}
 
+		if (!window.confirm('U SURE BRO?!')) {
+			return
+		}
+
 		// Delete todo from the api
 		await TodosAPI.deleteTodo(todo.id)
 
