@@ -17,6 +17,14 @@ const TodosPage = () => {
 	// Get todos from api
 	const getTodos = async () => {
 		const data = await TodosAPI.getTodos()
+
+		// sort alphabetically by title
+		data.sort((a, b) => a.title.localeCompare(b.title))
+
+		// sort by completed status
+		data.sort((a, b) => Number(a.completed) - Number(b.completed))
+
+		// update todos state
 		setTodos(data)
 	}
 
