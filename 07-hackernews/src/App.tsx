@@ -1,12 +1,13 @@
 import Container from 'react-bootstrap/Container'
 import { Routes, Route } from 'react-router-dom'
+import Navigation from './components/Navigation'
 import HomePage from './pages/HomePage'
 import './assets/scss/App.scss'
 
 const App = () => {
 	return (
 		<div id="App">
-			{/* Navigation */}
+			<Navigation />
 
 			<Container className="py-3">
 				<Routes>
