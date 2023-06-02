@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import HomePage from './pages/HomePage'
 import './assets/scss/App.scss'
+import NotFound from './pages/NotFound'
 
 const App = () => {
 	return (
@@ -13,6 +14,8 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					{/* <Route path="/search" element={} /> */}
+
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Container>
 		</div>
