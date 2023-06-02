@@ -4,21 +4,43 @@ import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const SearchPage = () => {
+	const [error, setError] = useState<string|null>(null)
+	const [loading, setLoading] = useState(false)
+	const [searchInput, setSearchInput] = useState("")
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
+
+		// haxx0r
+		if (!searchInput.trim().length) {
+			return
+		}
+
+		// search HN
+	}
+
 	return (
 		<>
 			<h1>🔎🔦👀</h1>
 
-			<Form className="mb-4">
+			<Form className="mb-4" onSubmit={handleSubmit}>
 				<Form.Group className="mb-3" controlId="searchQuery">
 					<Form.Label>Search Query</Form.Label>
 					<Form.Control
-						type="text"
+						onChange={e => setSearchInput(e.target.value)}
 						placeholder="Enter your search query"
+						required
+						type="text"
+						value={searchInput}
 					/>
 				</Form.Group>
 
 				<div className="d-flex justify-content-end">
-					<Button variant="success" type="submit">Search</Button>
+					<Button
+						variant="success"
+						type="submit"
+						disabled={!searchInput.trim().length}
+					>Search</Button>
 				</div>
 			</Form>
 
