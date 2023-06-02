@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Todo } from '../types'
 import * as TodosAPI from '../services/TodosAPI'
+import ConfirmationModal from '../components/ConfirmationModal'
 
 const TodoPage = () => {
 	const [error, setError] = useState<string|null>(null)
 	const [loading, setLoading] = useState(true)
 	const [todo, setTodo] = useState<Todo|null>(null)
+	const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 	const navigate = useNavigate()
 	const { id } = useParams()
 	const todoId = Number(id)
@@ -40,9 +43,9 @@ const TodoPage = () => {
 			return
 		}
 
-		if (!window.confirm('U SURE BRO?!')) {
-			return
-		}
+		// if (!window.confirm('U SURE BRO?!')) {
+		// 	return
+		// }
 
 		// Delete todo from the api
 		await TodosAPI.deleteTodo(todo.id)
@@ -108,8 +111,16 @@ const TodoPage = () => {
 			<div className="buttons mb-3">
 				<Button variant='success' onClick={() => toggleTodo(todo)}>Toggle</Button>
 				<Button variant='warning'>Edit</Button>
-				<Button variant='danger' onClick={() => deleteTodo(todo)}>Delete</Button>
+				<Button variant='danger' onClick={() => setShowConfirmDelete(true)}>Delete</Button>
 			</div>
+
+			<ConfirmationModal
+				show={showConfirmDelete}
+				onCancel={() => setShowConfirmDelete(false)}
+				onConfirm={() => deleteTodo(todo)}
+			>
+				U SURE BRO?!
+			</ConfirmationModal>
 
 			<Link to="/todos">
 				<Button variant='secondary'>&laquo; All todos</Button>
