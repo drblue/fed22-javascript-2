@@ -106,7 +106,7 @@ const SearchPage = () => {
 					</ListGroup>
 
 					<Pagination
-						page={page + 1}
+						page={searchResult.page + 1}
 						totalPages={searchResult.nbPages}
 						hasPreviousPage={page > 0}
 						hasNextPage={page + 1 < searchResult.nbPages}
