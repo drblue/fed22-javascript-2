@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { searchByDate as HN_searchByDate } from '../services/HackerNewsAPI'
 import { HN_SearchResponse } from '../types'
+import Pagination from '../components/Pagination'
 
 const SearchPage = () => {
 	const [error, setError] = useState<string | null>(null)
@@ -104,25 +105,14 @@ const SearchPage = () => {
 						))}
 					</ListGroup>
 
-					<div className="d-flex justify-content-between align-items-center">
-						<div className="prev">
-							<Button
-								disabled={page <= 0}
-								onClick={() => { setPage(prevValue => prevValue - 1) }}
-								variant="primary"
-							>Previous Page</Button>
-						</div>
-
-						<div className="page">Page {searchResult.page + 1}/{searchResult.nbPages}</div>
-
-						<div className="next">
-							<Button
-								disabled={page + 1 >= searchResult.nbPages}
-								onClick={() => { setPage(prevValue => prevValue + 1) }}
-								variant="primary"
-							>Next Page</Button>
-						</div>
-					</div>
+					<Pagination
+						page={page + 1}
+						totalPages={searchResult.nbPages}
+						hasPreviousPage={page > 0}
+						hasNextPage={page + 1 < searchResult.nbPages}
+						onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+						onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+					/>
 				</div>
 			)}
 		</>
