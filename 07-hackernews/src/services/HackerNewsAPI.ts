@@ -37,7 +37,7 @@ const get = async <T>(endpoint: string) => {
  * @param {number} page Page of search results to get
  * @returns Promise
  */
-export const search = async (query: string, page: number) => {
+export const search = async (query: string, page = 0) => {
 	return get<HN_SearchResponse>(`/search?query=${query}&tags=story&page=${page}`)
 }
 
@@ -50,6 +50,6 @@ export const search = async (query: string, page: number) => {
  * @param {number} page Page of search results to get
  * @returns Promise
  */
-export const searchByDate = async (query: string, page: number) => {
+export const searchByDate = async (query: string, page = 0) => {
 	return get<HN_SearchResponse>(`/search_by_date?query=${query}&tags=story&page=${page}`)
 }
