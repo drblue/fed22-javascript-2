@@ -9,11 +9,12 @@ import { HN_SearchResponse } from '../types'
 const SearchPage = () => {
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
+	const [page, setPage] = useState(0)
 	const [searchInput, setSearchInput] = useState("")
 	const [searchResult, setSearchResult] = useState<HN_SearchResponse | null>(null)
 	const queryRef = useRef("")
 
-	const searchHackerNews = async (searchQuery: string) => {
+	const searchHackerNews = async (searchQuery: string, searchPage = 0) => {
 		setError(null)
 		setLoading(true)
 		setSearchResult(null)
@@ -22,7 +23,7 @@ const SearchPage = () => {
 		queryRef.current = searchQuery
 
 		try {
-			const res = await HN_searchByDate(searchQuery)
+			const res = await HN_searchByDate(searchQuery, searchPage)
 			setSearchResult(res)
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,8 +43,18 @@ const SearchPage = () => {
 		}
 
 		// search HN
-		searchHackerNews(searchInput)
+		setPage(0)
+		searchHackerNews(searchInput, 0)
 	}
+
+	// react to changes in our page state
+	useEffect(() => {
+		if (!queryRef.current) {
+			return
+		}
+
+		searchHackerNews(queryRef.current, page)
+	}, [page])
 
 	return (
 		<>
@@ -96,14 +107,18 @@ const SearchPage = () => {
 					<div className="d-flex justify-content-between align-items-center">
 						<div className="prev">
 							<Button
+								disabled={page <= 0}
+								onClick={() => { setPage(prevValue => prevValue - 1) }}
 								variant="primary"
 							>Previous Page</Button>
 						</div>
 
-						<div className="page">PAGE</div>
+						<div className="page">Page {searchResult.page + 1}/{searchResult.nbPages}</div>
 
 						<div className="next">
 							<Button
+								disabled={page + 1 >= searchResult.nbPages}
+								onClick={() => { setPage(prevValue => prevValue + 1) }}
 								variant="primary"
 							>Next Page</Button>
 						</div>
