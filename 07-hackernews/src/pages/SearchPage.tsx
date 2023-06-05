@@ -3,6 +3,7 @@ import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { useSearchParams } from 'react-router-dom'
 import { searchByDate as HN_searchByDate } from '../services/HackerNewsAPI'
 import { HN_SearchResponse } from '../types'
 import Pagination from '../components/Pagination'
@@ -13,15 +14,15 @@ const SearchPage = () => {
 	const [page, setPage] = useState(0)
 	const [searchInput, setSearchInput] = useState("")
 	const [searchResult, setSearchResult] = useState<HN_SearchResponse | null>(null)
-	const queryRef = useRef("")
+	const [searchParams, setSearchParams] = useSearchParams()
+
+	// get "query=" from URL Search Params
+	const query = searchParams.get("query")
 
 	const searchHackerNews = async (searchQuery: string, searchPage = 0) => {
 		setError(null)
 		setLoading(true)
 		setSearchResult(null)
-
-		// save searchQuery to queryRef
-		queryRef.current = searchQuery
 
 		try {
 			const res = await HN_searchByDate(searchQuery, searchPage)
@@ -43,19 +44,21 @@ const SearchPage = () => {
 			return
 		}
 
-		// search HN
+		// reset page state
 		setPage(0)
-		searchHackerNews(searchInput, 0)
+
+		// set input value as query in searchParams
+		setSearchParams({ query: searchInput })    // ?query=tesla
 	}
 
 	// react to changes in our page state
 	useEffect(() => {
-		if (!queryRef.current) {
+		if (!query) {
 			return
 		}
 
-		searchHackerNews(queryRef.current, page)
-	}, [page])
+		searchHackerNews(query, page)
+	}, [query, page])
 
 	return (
 		<>
@@ -88,7 +91,7 @@ const SearchPage = () => {
 
 			{searchResult && (
 				<div id="search-result">
-					<p>Showing {searchResult.nbHits} search results for "{queryRef.current}"...</p>
+					<p>Showing {searchResult.nbHits} search results for "{query}"...</p>
 
 					<ListGroup className="mb-3">
 						{searchResult.hits.map(hit => (
