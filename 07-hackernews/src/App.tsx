@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import Container from 'react-bootstrap/Container'
 import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
@@ -10,8 +11,12 @@ import './assets/scss/App.scss'
 const App = () => {
 	const { isDarkMode } = useThemeContext()
 
+	const cssClasses = classNames({
+		'bg-dark text-white': isDarkMode,
+	})
+
 	return (
-		<div id="App" className={ isDarkMode ? 'bg-dark text-white' : ''}>
+		<div id="App" className={cssClasses}>
 			<Navigation />
 
 			<Container className="py-3">
