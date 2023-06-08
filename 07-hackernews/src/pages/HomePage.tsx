@@ -7,10 +7,7 @@ const HomePage = () => {
 	const { isDarkMode, toggleTheme } = useContext(ThemeContext)
 
 	const handleToggleTheme = () => {
-		if (toggleTheme) {
-			toggleTheme()
-		}
-		// toggleTheme?.()
+		toggleTheme()
 	}
 
 	return (
