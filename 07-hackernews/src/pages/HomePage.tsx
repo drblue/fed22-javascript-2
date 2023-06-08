@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import { ThemeContext } from '../contexts/ThemeContextProvider'
 
 const HomePage = () => {
-	const theme = useContext(ThemeContext)
+	const { isDarkMode } = useContext(ThemeContext)
 
 	return (
 		<>
 			<h1>Welcome to Hacker News 🕵🏻‍♂️🤓👀!</h1>
 
-			<p>Your theme is: {theme}</p>
+			<p>Your theme is: {isDarkMode ? 'dark 🌙' : 'light ☀️'}</p>
 
 			<Link to="/search">
 				<Button variant="primary">Use the Search, you must!</Button>
