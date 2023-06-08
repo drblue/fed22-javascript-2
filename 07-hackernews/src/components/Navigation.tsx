@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink, Link } from 'react-router-dom'
-import { useThemeContext } from '../contexts/ThemeContextProvider'
+import useThemeContext from '../hooks/useThemeContext'
 
 const Navigation = () => {
 	const { isDarkMode, toggleTheme } = useThemeContext()
