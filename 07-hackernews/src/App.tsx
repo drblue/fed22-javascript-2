@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import useThemeContext from './hooks/useThemeContext'
+import ChuckNorrisPage from './pages/ChuckNorrisPage'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import RandomDogPage from './pages/RandomDogPage'
@@ -23,6 +24,7 @@ const App = () => {
 			<Container className="py-3">
 				<Routes>
 					<Route path="/" element={<HomePage />} />
+					<Route path="/chuck-norris" element={<ChuckNorrisPage />} />
 					<Route path="/random-dog" element={<RandomDogPage />} />
 					<Route path="/search" element={<SearchPage />} />
 
