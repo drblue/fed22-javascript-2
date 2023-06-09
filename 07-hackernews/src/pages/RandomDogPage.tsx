@@ -5,7 +5,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import useGetData from '../hooks/useGetData'
 
 const RandomDogPage = () => {
-	const { changeUrl, data, error, execute, loading } = useGetData()
+	const { changeUrl, data, error, execute, isError, isLoading } = useGetData()
 
 	return (
 		<>
@@ -38,9 +38,9 @@ const RandomDogPage = () => {
 				>MOAR!!</Button>
 			</div>
 
-			{loading && <Spinner animation="border" variant="secondary" />}
+			{isLoading && <Spinner animation="border" variant="secondary" />}
 
-			{error && <Alert variant="warning">{error}</Alert>}
+			{isError === true && <Alert variant="warning">{error}</Alert>}
 
 			<div>
 				{data && data.status === "success" && <Image src={data.message} fluid />}
