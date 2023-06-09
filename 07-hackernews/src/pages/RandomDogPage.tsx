@@ -22,11 +22,6 @@ const RandomDogPage = () => {
 
 				<Button
 					variant="primary"
-					onClick={() => changeUrl("lolcats.exe")}
-				>No doggos plz, I like cats</Button>
-
-				<Button
-					variant="primary"
 					// onClick={() => {}}
 				>MOAR!!</Button>
 			</div>

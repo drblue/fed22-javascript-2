@@ -12,6 +12,7 @@ const useGetData = (initialUrl: string|null = null) => {
 			const url = new URL(_url)
 			setUrl(url.toString())
 
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			// kids, don't do this at home (or work)
 			console.log("That's not a valid URL!")
