@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image'
 import useGetData from '../hooks/useGetData'
 
 const RandomDogPage = () => {
-	const { data, changeUrl } = useGetData()
+	const { data, changeUrl, execute } = useGetData()
 
 	return (
 		<>
@@ -22,7 +22,7 @@ const RandomDogPage = () => {
 
 				<Button
 					variant="primary"
-					// onClick={() => {}}
+					onClick={() => execute()}
 				>MOAR!!</Button>
 			</div>
 

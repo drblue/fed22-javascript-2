@@ -19,6 +19,14 @@ const useGetData = (initialUrl: string|null = null) => {
 		}
 	}
 
+	const execute = () => {
+		if (!url) {
+			return
+		}
+
+		getData(url)
+	}
+
 	const getData = async (resourceUrl: string) => {
 		const res = await axios.get<DogAPI_RandomImageResponse>(resourceUrl)
 		// await new Promise(r => setTimeout(r, 3000))
@@ -36,6 +44,7 @@ const useGetData = (initialUrl: string|null = null) => {
 	return {
 		changeUrl,
 		data,
+		execute,
 	}
 }
 
