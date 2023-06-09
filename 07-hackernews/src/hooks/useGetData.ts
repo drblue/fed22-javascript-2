@@ -4,6 +4,8 @@ import axios from 'axios'
 
 const useGetData = (initialUrl: string|null = null) => {
 	const [data, setData] = useState<DogAPI_RandomImageResponse|null>(null)
+	const [error, setError] = useState<string|null>(null)
+	const [loading, setLoading] = useState(false)
 	const [url, setUrl] = useState<string|null>(initialUrl)
 
 	const changeUrl = (_url: string) => {
@@ -14,8 +16,7 @@ const useGetData = (initialUrl: string|null = null) => {
 
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
-			// kids, don't do this at home (or work)
-			console.log("That's not a valid URL!")
+			setError("That's not a valid URL!")
 		}
 	}
 
@@ -28,9 +29,22 @@ const useGetData = (initialUrl: string|null = null) => {
 	}
 
 	const getData = async (resourceUrl: string) => {
-		const res = await axios.get<DogAPI_RandomImageResponse>(resourceUrl)
-		// await new Promise(r => setTimeout(r, 3000))
-		setData(res.data)
+		// reset state
+		setData(null)
+		setError(null)
+		setLoading(true)
+
+		try {
+			const res = await axios.get<DogAPI_RandomImageResponse>(resourceUrl)
+			await new Promise(r => setTimeout(r, 3000))
+			setData(res.data)
+
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (err: any) {
+			setError(err.message)
+		}
+
+		setLoading(false)
 	}
 
 	useEffect(() => {
@@ -44,7 +58,9 @@ const useGetData = (initialUrl: string|null = null) => {
 	return {
 		changeUrl,
 		data,
+		error,
 		execute,
+		loading,
 	}
 }
 

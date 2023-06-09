@@ -1,15 +1,17 @@
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
+import Spinner from 'react-bootstrap/Spinner'
 import useGetData from '../hooks/useGetData'
 
 const RandomDogPage = () => {
-	const { data, changeUrl, execute } = useGetData()
+	const { changeUrl, data, error, execute, loading } = useGetData()
 
 	return (
 		<>
 			<h1>A random doggo 🐶</h1>
 
-			<div>
+			<div className="mb-3">
 				<Button
 					variant="primary"
 					onClick={() => changeUrl("https://dog.ceo/api/breeds/image/random")}
@@ -21,12 +23,24 @@ const RandomDogPage = () => {
 				>Random Boxer Doggo</Button>
 
 				<Button
+					variant="danger"
+					onClick={() => changeUrl("C:\\passwords.txt")}
+				>Haxx0r</Button>
+
+				<Button
+					variant="danger"
+					onClick={() => changeUrl("http://iuowrvenu9esrnvcu9senoiaercs.com")}
+				>Fail Army</Button>
+
+				<Button
 					variant="primary"
 					onClick={() => execute()}
 				>MOAR!!</Button>
 			</div>
 
-			{!data && <p>Loading...</p>}
+			{loading && <Spinner animation="border" variant="secondary" />}
+
+			{error && <Alert variant="warning">{error}</Alert>}
 
 			<div>
 				{data && data.status === "success" && <Image src={data.message} fluid />}
