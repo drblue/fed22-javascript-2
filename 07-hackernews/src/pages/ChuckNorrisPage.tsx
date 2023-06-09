@@ -1,12 +1,11 @@
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import useGetData from '../hooks/useGetData'
-import { ChuckNorrisAPI_RandomJokeResponse } from '../types'
+import useChuckNorrisJoke from '../hooks/useChuckNorrisJoke'
 
 const ChuckNorrisPage = () => {
 	const { data, error, execute, isError, isLoading } =
-		useGetData<ChuckNorrisAPI_RandomJokeResponse>("https://api.chucknorris.io/jokes/random")
+		useChuckNorrisJoke()
 
 	return (
 		<>
