@@ -21,10 +21,15 @@ interface IProps {
 
 // This allows us to wrap <App /> and provide the theme to our children and grandchildren etc.
 const ThemeContextProvider: React.FC<IProps> = ({ children }) => {
-	const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+	const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+		const hn_darkmode = window.localStorage.getItem('hn_darkmode') ?? ""
+
+		return hn_darkmode === "true"
+	})
 
 	const toggleTheme = () => {
 		setIsDarkMode(!isDarkMode)
+		window.localStorage.setItem('hn_darkmode', String(!isDarkMode))
 	}
 
 	return (
