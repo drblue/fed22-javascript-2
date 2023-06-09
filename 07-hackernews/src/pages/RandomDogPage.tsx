@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image'
 import useGetData from '../hooks/useGetData'
 
 const RandomDogPage = () => {
-	const { data, setUrl } = useGetData()
+	const { data, changeUrl } = useGetData()
 
 	return (
 		<>
@@ -12,13 +12,18 @@ const RandomDogPage = () => {
 			<div>
 				<Button
 					variant="primary"
-					onClick={() => setUrl("https://dog.ceo/api/breeds/image/random")}
+					onClick={() => changeUrl("https://dog.ceo/api/breeds/image/random")}
 				>Random Doggo</Button>
 
 				<Button
 					variant="primary"
-					onClick={() => setUrl("https://dog.ceo/api/breed/boxer/images/random")}
+					onClick={() => changeUrl("https://dog.ceo/api/breed/boxer/images/random")}
 				>Random Boxer Doggo</Button>
+
+				<Button
+					variant="primary"
+					onClick={() => changeUrl("lolcats.exe")}
+				>No doggos plz, I like cats</Button>
 
 				<Button
 					variant="primary"
