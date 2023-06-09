@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { DogAPI_RandomImageResponse } from '../types'
 import axios from 'axios'
 
-const useGetData = (initialUrl: string|null = null) => {
-	const [data, setData] = useState<DogAPI_RandomImageResponse|null>(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useGetData = <T = any>(initialUrl: string|null = null) => {
+	const [data, setData] = useState<T|null>(null)
 	const [error, setError] = useState<string|null>(null)
 	const [isError, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
@@ -38,7 +38,7 @@ const useGetData = (initialUrl: string|null = null) => {
 		setIsLoading(true)
 
 		try {
-			const res = await axios.get<DogAPI_RandomImageResponse>(resourceUrl)
+			const res = await axios.get<T>(resourceUrl)
 			await new Promise(r => setTimeout(r, 3000))
 			setData(res.data)
 

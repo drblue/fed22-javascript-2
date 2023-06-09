@@ -3,9 +3,11 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 import useGetData from '../hooks/useGetData'
+import { DogAPI_RandomImageResponse } from '../types'
 
 const RandomDogPage = () => {
-	const { changeUrl, data, error, execute, isError, isLoading } = useGetData()
+	const { changeUrl, data, error, execute, isError, isLoading } =
+		useGetData<DogAPI_RandomImageResponse>()
 
 	return (
 		<>
