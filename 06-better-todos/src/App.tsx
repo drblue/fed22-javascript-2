@@ -17,10 +17,20 @@ const App = () => {
 			<Container className="py-3">
 				<Routes>
 					<Route path="/" element={<HomePage />} />
-					<Route path="/todos" element={<TodosPage />} />
-					<Route path="/todos/:id" element={<TodoPage />} />
-					<Route path="/todos/:id/edit" element={<EditTodoPage />} />
-					<Route path="/todos/create" element={<CreateTodoPage />} />
+
+					<Route path="/todos">
+						{/* /todos */}
+						<Route path="" element={<TodosPage />} />
+
+						{/* /todos/:id */}
+						<Route path=":id" element={<TodoPage />} />
+
+						{/* /todos/:id/edit */}
+						<Route path=":id/edit" element={<EditTodoPage />} />
+
+						{/* /todos/create */}
+						<Route path="create" element={<CreateTodoPage />} />
+					</Route>
 
 					<Route path="*" element={<NotFound />} />
 				</Routes>
