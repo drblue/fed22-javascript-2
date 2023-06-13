@@ -7,14 +7,7 @@ type ThemeContextType = {
 }
 
 // This creates the actual context and sets the context's initial/default value
-export const ThemeContext = createContext<ThemeContextType>({
-	isDarkMode: false,
-	toggleTheme: () => {
-		// we can provide a "default" implementation that throws an error if
-		// trying to use `toggleTheme()` outside of context
-		throw new Error("Trying to use toggleTheme outside of context")
-	}
-})
+export const ThemeContext = createContext<ThemeContextType | null>(null)
 
 interface IProps {
 	children: React.ReactNode
