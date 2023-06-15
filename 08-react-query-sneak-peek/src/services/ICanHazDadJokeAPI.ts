@@ -7,7 +7,7 @@
 import axios from 'axios'
 import { DadJokeResponse } from '../types/index'
 
-const FAKE_DELAY = 1500
+const FAKE_DELAY = 2500
 
 // Create a new axios instance
 const instance = axios.create({
