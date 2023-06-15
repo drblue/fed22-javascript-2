@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.13",
+    "@tanstack/react-query-devtools": "^4.29.13",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "classnames": "^2.3.2",

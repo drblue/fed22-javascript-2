@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import classNames from 'classnames'
 import Container from 'react-bootstrap/Container'
 import { Route, Routes } from 'react-router-dom'
@@ -28,6 +29,8 @@ const App = () => {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Container>
+
+			<ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
 		</div>
 	)
 }

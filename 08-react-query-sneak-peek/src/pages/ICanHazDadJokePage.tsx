@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import Alert from "react-bootstrap/Alert"
 import Button from "react-bootstrap/Button"
-import Spinner from "react-bootstrap/Spinner"
-import { getRandomDadJoke } from '../services/ICanHazDadJokeAPI'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { getRandomDadJoke } from '../services/ICanHazDadJokeAPI'
 
 const ICanHazDadJokePage = () => {
 	const {
