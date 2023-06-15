@@ -26,12 +26,12 @@ const instance = axios.create({
  * @returns Promise
  */
 const get = async <T>(endpoint: string) => {
-	const response = await instance.get(endpoint)
+	const response = await instance.get<T>(endpoint)
 
 	// fake slow API if FAKE_DELAY is not falsy
 	!!FAKE_DELAY && await new Promise(resolve => setTimeout(resolve, FAKE_DELAY))
 
-	return response.data as T
+	return response.data
 }
 
 /**
