@@ -16,11 +16,9 @@ const ICanHazDadJokePage = () => {
 
 			<div>
 				{true && (
-					<>
-						<p className="display-5 text-center my-5">
-							JOKE
-						</p>
-					</>
+					<p className="display-5 text-center my-5">
+						JOKE
+					</p>
 				)}
 			</div>
 
