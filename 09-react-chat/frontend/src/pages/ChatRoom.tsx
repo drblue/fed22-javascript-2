@@ -5,14 +5,16 @@ import InputGroup from "react-bootstrap/InputGroup"
 import ListGroup from "react-bootstrap/ListGroup"
 import { useNavigate, useParams } from "react-router-dom"
 import useChatContext from "../hooks/useChatContext"
-import { Room } from "@backend/types/shared/Models"
+import { Room, User } from "@backend/types/shared/Models"
 import MessageBubble from "../components/MessageBubble"
 import { ChatMessageData } from "@backend/types/shared/SocketTypes"
+import UserListItem from "../components/UserListItem"
 
 const ChatRoom = () => {
 	const { username, socket } = useChatContext()
 	const [message, setMessage] = useState("")
 	const [messages, setMessages] = useState<ChatMessageData[]>([])
+	const [users, setUsers] = useState<User[]>([])
 	const [connected, setConnected] = useState(false)
 	const [room, setRoom] = useState<Room|null>(null)
 
@@ -97,10 +99,23 @@ const ChatRoom = () => {
 		})
 
 		// listen for updated user list
+		socket.on("onlineUsers", (users) => {
+			console.log("onlineUsers", users)
+
+			// replace online users with updated list
+			setUsers(users)
+		})
 
 		// stop listening on unmount
 		return () => {
 			socket.off("chatMessage")
+			socket.off("onlineUsers")
+
+			/**
+			 * @todo Add `userLeave`-event so the server deletes
+			 * the user and emits a new onlineUsers list to everyone
+			 * still in the room
+			 */
 		}
 	}, [socket])
 
@@ -152,6 +167,13 @@ const ChatRoom = () => {
 			<div id="users">
 				<h2>Users</h2>
 				<ListGroup id="online-users">
+					{users.map((user, i) => (
+						<UserListItem
+							key={i}
+							user={user}
+							self={user.name === username}
+						/>
+					))}
 				</ListGroup>
 			</div>
 		</div>
