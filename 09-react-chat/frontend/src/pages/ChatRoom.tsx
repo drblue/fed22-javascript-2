@@ -86,6 +86,24 @@ const ChatRoom = () => {
 		messageRef.current?.focus()
 	}, [socket, username, room_id, navigate])
 
+	// register event listeners on mount
+	useEffect(() => {
+		// listen for new messages
+		socket.on("chatMessage", (message) => {
+			console.log("chatMessage", message)
+
+			// append message to message list
+			setMessages(prevMessages => [...prevMessages, message])
+		})
+
+		// listen for updated user list
+
+		// stop listening on unmount
+		return () => {
+			socket.off("chatMessage")
+		}
+	}, [socket])
+
 	// show spinner unless we're connected and have room info
 	if (!connected || !room_id || !room) {
 		return (
