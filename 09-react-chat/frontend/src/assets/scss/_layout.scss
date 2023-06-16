@@ -1,0 +1,51 @@
+#App,
+#login {
+	height: 100vh;
+	width: 100vw;
+}
+
+#App {
+	background-color: $bg-color;
+	display: flex;
+	flex-direction: column;
+
+	.container-fluid {
+		flex-grow: 1;
+	}
+}
+
+.hide {
+	display: none !important;
+}
+
+#login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	#username-form {
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+#chat-wrapper {
+	// display: grid;
+	// grid-template-columns: 3fr 1fr;
+	display: flex;
+	height: 100%;
+
+	#chat {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		border-right: 1px solid #555;
+		overflow-y: scroll;
+
+		h2 {
+			background-color: $heading-bg-color;
+			padding: 0.5rem 0.75rem;
+			color: white;
+		}
+	}
+}
