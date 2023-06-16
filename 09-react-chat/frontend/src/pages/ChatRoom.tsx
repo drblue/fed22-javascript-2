@@ -5,13 +5,14 @@ import InputGroup from "react-bootstrap/InputGroup"
 import ListGroup from "react-bootstrap/ListGroup"
 import { useNavigate, useParams } from "react-router-dom"
 import useChatContext from "../hooks/useChatContext"
-import { Message, Room } from "@backend/types/shared/Models"
+import { Room } from "@backend/types/shared/Models"
 import MessageBubble from "../components/MessageBubble"
+import { ChatMessageData } from "@backend/types/shared/SocketTypes"
 
 const ChatRoom = () => {
 	const { username, socket } = useChatContext()
 	const [message, setMessage] = useState("")
-	const [messages, setMessages] = useState<Message[]>([])
+	const [messages, setMessages] = useState<ChatMessageData[]>([])
 	const [connected, setConnected] = useState(false)
 	const [room, setRoom] = useState<Room|null>(null)
 
@@ -22,15 +23,26 @@ const ChatRoom = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
-		if (!message.length) {
+		if (!message.length || !room_id) {
 			return
 		}
 
 		// Construct message payload
+		const payload: ChatMessageData = {
+			username: username,
+			roomId: room_id,
+			content: message,
+			timestamp: Date.now(),
+		}
+
+		// Send (emit) the message to the server
+		socket.emit("sendChatMessage", payload)
 
 		// Append the message to the list of messages
+		setMessages((prevMessages) => [ ...prevMessages, payload ])
 
 		// Clear the input field
+		setMessage("")
 
 		// Focus on the input field
 		messageRef.current?.focus()
@@ -91,9 +103,9 @@ const ChatRoom = () => {
 				<h2 id="chat-title">{room.name}</h2>
 				<div id="message-wrapper">
 					<ListGroup id="messages">
-						{messages.map(message => (
+						{messages.map((message, i) => (
 							<MessageBubble
-								key={message.id}
+								key={i}
 								message={message}
 								self={message.username === username}
 							/>
