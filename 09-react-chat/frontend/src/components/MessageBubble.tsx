@@ -8,7 +8,7 @@ interface IProps {
 	self?: boolean
 }
 
-const Message: React.FC<IProps> = ({ message, self = false }) => {
+const MessageBubble: React.FC<IProps> = ({ message, self = false }) => {
 	const time = new Date(message.timestamp).toLocaleTimeString()
 
 	const cssClasses = classNames("message", {
@@ -24,4 +24,4 @@ const Message: React.FC<IProps> = ({ message, self = false }) => {
 	)
 }
 
-export default Message
+export default MessageBubble
