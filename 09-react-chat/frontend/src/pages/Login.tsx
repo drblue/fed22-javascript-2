@@ -24,7 +24,7 @@ const Login = () => {
 		setUsername(inputUsername)
 
 		// redirect to chat room
-		navigate(`/rooms/${room.id}/${room.name}`)
+		navigate(`/rooms/${room.id}`)
 	}
 
 	// as soon as component is mounted, request room list
